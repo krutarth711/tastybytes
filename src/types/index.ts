@@ -1,14 +1,3 @@
-import { DefaultTheme } from 'styled-components';
-
-export interface NutritionFacts {
-  calories: number;
-  protein: number;
-  carbs: number;
-  fat: number;
-  fiber: number;
-  sugar: number;
-}
-
 export interface Recipe {
   id: number;
   title: string;
@@ -24,6 +13,15 @@ export interface Recipe {
   instructions: Instruction[];
 }
 
+export interface NutritionFacts {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  fiber: number;
+  sugar: number;
+}
+
 export interface Ingredient {
   id: number;
   name: string;
@@ -36,26 +34,4 @@ export interface Instruction {
   description: string;
   hasTimer: boolean;
   timerDuration?: number;
-}
-
-export interface CustomTheme extends DefaultTheme {
-  colors: {
-    primary: string;
-    secondary: string;
-    neutralDark: string;
-    neutralLight: string;
-    accent: string;
-    background: string;
-    text: string;
-  };
-  typography: {
-    headingFont: string;
-    bodyFont: string;
-    accentFont: string;
-  };
-  breakpoints: {
-    mobile: string;
-    tablet: string;
-    desktop: string;
-  };
 } 
