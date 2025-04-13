@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, DefaultTheme } from 'styled-components';
 
-export const lightTheme = {
+export const lightTheme: DefaultTheme = {
   colors: {
     primary: '#FF6B6B',
     secondary: '#4ECDC4',
@@ -22,7 +22,7 @@ export const lightTheme = {
   },
 };
 
-export const darkTheme = {
+export const darkTheme: DefaultTheme = {
   colors: {
     primary: '#FF6B6B',
     secondary: '#4ECDC4',
@@ -44,9 +44,7 @@ export const darkTheme = {
   },
 };
 
-export type Theme = typeof lightTheme;
-
-export const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
+export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap');
 
   * {

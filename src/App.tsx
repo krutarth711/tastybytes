@@ -6,15 +6,7 @@ import HomePage from './pages/HomePage';
 import RecipeDetailPage from './pages/RecipeDetailPage';
 import CookingModePage from './pages/CookingModePage';
 import AboutPage from './pages/AboutPage';
-import styled from 'styled-components';
 import { useState } from 'react';
-
-const AppContainer = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-`;
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -26,7 +18,7 @@ function App() {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyle />
-      <AppContainer>
+      <div style={{ width: '100%', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Router>
           <Layout isDarkMode={isDarkMode} toggleTheme={toggleTheme}>
             <Routes>
@@ -37,7 +29,7 @@ function App() {
             </Routes>
           </Layout>
         </Router>
-      </AppContainer>
+      </div>
     </ThemeProvider>
   );
 }
