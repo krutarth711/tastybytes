@@ -1,0 +1,159 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# TastyBytes Recipe Blog - Project Specification
+
+## Prompt
+Create an interactive recipe blog web application called "TastyBytes" with the following features:
+- Clean, modern UI with focus on food photography
+- Interactive recipe cards with ingredient scaling
+- Step-by-step cooking instructions with built-in timers
+- Category filtering and search functionality
+- Responsive design for mobile and desktop
+- Simple mock data for 10-15 recipes
+- Use React, CSS modules, and any chart/UI libraries you recommend
+
+The application should have the following pages:
+1. Home page with featured recipes and category filtering
+2. Recipe detail page with interactive elements
+3. Simple "About" page
+
+Start by creating the project structure, component hierarchy, and basic styling system. Then implement the home page with recipe cards.
+
+## Project Overview
+TastyBytes is an interactive recipe blog focused on creating an engaging cooking experience. The application allows users to browse recipes, adjust ingredient quantities, follow step-by-step instructions with built-in timers, and filter content by categories.
+
+## Core Features
+
+### Home Page
+- Hero section with featured recipe of the day
+- Category filtering system (Breakfast, Lunch, Dinner, Dessert, Vegetarian, etc.)
+- Recipe card grid with visually appealing layout
+- Simple search functionality
+- Responsive design for all device sizes
+
+### Recipe Cards
+- Beautiful food photography
+- Recipe title and brief description
+- Preparation time and difficulty level
+- Category tags
+- Serving size
+- Smooth hover effects and transitions
+
+### Recipe Detail Page
+- Large hero image of the finished dish
+- Interactive serving size adjuster that recalculates ingredient quantities
+- Tabbed interface to switch between "Ingredients" and "Instructions"
+- Interactive checklist for ingredients
+- Step-by-step instructions with built-in timers where applicable
+- "Jump to step" navigation
+- Nutrition information with visual representation
+- Related recipes section
+
+### Interactive Elements
+- Ingredient quantity adjuster (scales recipe based on serving size)
+- Built-in cooking timers with visual countdown and audio notification
+- Step completion tracking
+- Printable recipe version
+- Dark/light mode toggle
+
+## Technical Specifications
+
+### Tech Stack
+- React (with hooks)
+- CSS Modules or styled-components for styling
+- React Router for navigation
+- Local mock data for recipes (JSON format)
+- Optional: Framer Motion for animations
+
+### Data Structure
+Example recipe object:
+```json
+{
+  "id": "001",
+  "title": "Creamy Garlic Pasta",
+  "description": "A quick and comforting pasta dish with a creamy garlic sauce",
+  "preparationTime": 15,
+  "cookingTime": 20,
+  "difficulty": "Easy",
+  "servings": 4,
+  "categories": ["Dinner", "Pasta", "Vegetarian"],
+  "featuredImage": "/images/creamy-garlic-pasta.jpg",
+  "ingredients": [
+    {
+      "name": "Fettuccine pasta",
+      "quantity": 8,
+      "unit": "oz",
+      "notes": "Or pasta of choice"
+    },
+    {
+      "name": "Butter",
+      "quantity": 2,
+      "unit": "tbsp"
+    },
+    // More ingredients...
+  ],
+  "instructions": [
+    {
+      "step": 1,
+      "description": "Bring a large pot of salted water to boil.",
+      "hasTimer": false
+    },
+    {
+      "step": 2,
+      "description": "Cook pasta according to package directions until al dente.",
+      "hasTimer": true,
+      "timerDuration": 10
+    },
+    // More steps...
+  ],
+  "nutritionFacts": {
+    "calories": 450,
+    "protein": 12,
+    "carbs": 65,
+    "fat": 18
+  },
+  "tags": ["quick", "comfort food", "creamy"],
+  "relatedRecipes": ["002", "007", "013"]
+}
+```
+
+## UI/UX Guidelines
+
+### Color Palette
+- Primary: #FF6B6B (coral red - for accents and CTAs)
+- Secondary: #4ECDC4 (teal - for secondary elements)
+- Neutral Dark: #292F36 (near black - for text)
+- Neutral Light: #F7F9FB (off-white - for backgrounds)
+- Accent: #FFD166 (yellow - for highlights and timers)
+
+### Typography
+- Headings: Montserrat, sans-serif (bold)
+- Body: Open Sans, sans-serif (regular)
+- Accent: Playfair Display, serif (for recipe titles)
+
+### Layout
+- Clean, minimalist design with ample white space
+- Card-based UI for recipe listings
+- Strong visual hierarchy emphasizing food photography
+- Consistent padding and margins
+- Grid-based layouts that reflow for different screen sizes
+
+## Development Milestones
+
+1. Project setup and component architecture
+2. Mock data creation and basic styling system
+3. Home page with recipe cards and filtering
+4. Recipe detail page layout
+5. Interactive elements (scaling, timers)
+6. Responsive design and testing
+7. Final polish and animations
+
+## Hackathon Success Criteria Focus
+- Visual design quality and consistency
+- Interactive elements that enhance the cooking experience
+- Smooth animations and transitions
+- Intuitive navigation and information architecture
+- Responsive design implementation
