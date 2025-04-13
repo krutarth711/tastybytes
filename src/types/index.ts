@@ -1,4 +1,4 @@
-import { Theme } from 'styled-components';
+import { DefaultTheme } from 'styled-components';
 
 export interface NutritionFacts {
   calories: number;
@@ -18,10 +18,10 @@ export interface Recipe {
   cookingTime: string;
   difficulty: string;
   servings: number;
-  ingredients: Ingredient[];
-  instructions: Instruction[];
   category: string;
   nutrition: NutritionFacts;
+  ingredients: Ingredient[];
+  instructions: Instruction[];
 }
 
 export interface Ingredient {
@@ -38,13 +38,15 @@ export interface Instruction {
   timerDuration?: number;
 }
 
-export interface AppTheme extends Theme {
+export interface CustomTheme extends DefaultTheme {
   colors: {
     primary: string;
     secondary: string;
     neutralDark: string;
     neutralLight: string;
     accent: string;
+    background: string;
+    text: string;
   };
   typography: {
     headingFont: string;

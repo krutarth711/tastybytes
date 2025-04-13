@@ -615,12 +615,12 @@ const RecipeDetailPage: React.FC = () => {
                         fill="#8884d8"
                         dataKey="value"
                       >
-                        {getNutrientData(recipe.nutrition).map((entry, index) => (
+                        {getNutrientData(recipe.nutrition).map((_, index) => (
                           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
                       <Tooltip />
-                      <Legend wrapperStyle={{ marginBottom: '20px' }} />
+                      <Legend />
                     </PieChart>
                   </ResponsiveContainer>
                 </NutrientChartContainer>
