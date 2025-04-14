@@ -62,18 +62,35 @@ const RecipeImage = styled.img`
 
 const RecipeContent = styled.div`
   padding: 0.5rem 1rem 1rem 1rem;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const RecipeTitle = styled.h3`
   font-family: ${({ theme }) => theme.typography.accentFont};
   margin-bottom: 0.5rem;
   color: ${({ theme }) => theme.colors.text};
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+  height: 2.4em;
 `;
 
 const RecipeDescription = styled.p`
   color: ${({ theme }) => theme.colors.text};
   font-size: 0.9rem;
   margin-bottom: 1rem;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
 `;
 
 const RecipeMeta = styled.div`
@@ -82,6 +99,7 @@ const RecipeMeta = styled.div`
   font-size: 0.8rem;
   color: ${({ theme }) => theme.colors.text};
   opacity: 0.8;
+  margin-top: auto;
 `;
 
 const IngredientsList = styled.ul`

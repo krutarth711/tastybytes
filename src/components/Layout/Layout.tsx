@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { FaSun, FaMoon } from 'react-icons/fa';
+import { FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
 
 const LayoutContainer = styled.div`
   width: 100%;
@@ -12,9 +12,12 @@ const LayoutContainer = styled.div`
 
 const Header = styled.header`
   background-color: ${({ theme }) => theme.colors.background};
-  padding: 1rem 2rem;
+  padding: 1rem;
   width: 100%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 `;
 
 const Nav = styled.nav`
@@ -24,6 +27,7 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
+  position: relative;
 `;
 
 const Logo = styled(Link)`
@@ -34,6 +38,7 @@ const Logo = styled(Link)`
   position: relative;
   text-decoration: none;
   padding: 0.2rem 0;
+  z-index: 2;
   
   &::after {
     content: '';
@@ -55,10 +60,27 @@ const Logo = styled(Link)`
   }
 `;
 
-const NavLinks = styled.div`
+interface NavLinksProps {
+  isOpen: boolean;
+}
+
+const NavLinks = styled.div<NavLinksProps>`
   display: flex;
   gap: 2rem;
   align-items: center;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    position: fixed;
+    top: 0;
+    right: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+    height: 100vh;
+    width: 250px;
+    background-color: ${({ theme }) => theme.colors.background};
+    flex-direction: column;
+    padding: 5rem 2rem;
+    transition: right 0.3s ease;
+    box-shadow: ${({ isOpen }) => (isOpen ? '-2px 0 5px rgba(0, 0, 0, 0.1)' : 'none')};
+  }
 `;
 
 const NavLink = styled(Link)`
@@ -82,11 +104,24 @@ const ThemeToggle = styled.button`
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  margin-right: 1rem;
   transition: color 0.2s ease;
 
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
+const MenuButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.colors.text};
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 2;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    display: block;
   }
 `;
 
@@ -103,17 +138,26 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, isDarkMode, toggleTheme }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <LayoutContainer>
       <Header>
         <Nav>
           <Logo to="/">TastyBytes</Logo>
-          <NavLinks>
+          <MenuButton onClick={toggleMenu}>
+            {isMenuOpen ? <FaTimes /> : <FaBars />}
+          </MenuButton>
+          <NavLinks isOpen={isMenuOpen}>
             <ThemeToggle onClick={toggleTheme}>
               {isDarkMode ? <FaSun /> : <FaMoon />}
             </ThemeToggle>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/about">About</NavLink>
+            <NavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</NavLink>
+            <NavLink to="/about" onClick={() => setIsMenuOpen(false)}>About</NavLink>
           </NavLinks>
         </Nav>
       </Header>

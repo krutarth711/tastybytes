@@ -11,135 +11,198 @@ import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recha
 const PageContainer = styled.div<{ backgroundColor?: string }>`
   width: 100%;
   min-height: 100vh;
-  padding: 0 2rem;
+  padding: 2rem;
   background-color: ${({ backgroundColor, theme }) => backgroundColor || theme.colors.background};
   transition: background-color 1s ease-in-out;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const RecipeContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   background-color: ${({ theme }) => 
     theme.colors.background === '#FFFFFF' 
-      ? 'rgba(255, 255, 255, 0.8)' 
-      : 'rgba(26, 26, 26, 0.8)'};
-  box-shadow: 0 4px 6px ${({ theme }) => 
-    theme.colors.background === '#FFFFFF'
-      ? 'rgba(0, 0, 0, 0.05)'
-      : 'rgba(0, 0, 0, 0.2)'};
-  backdrop-filter: blur(10px);
-  border: 1px solid ${({ theme }) =>
+      ? 'rgba(255, 255, 255, 0.95)' 
+      : 'rgba(26, 26, 26, 0.95)'};
+  box-shadow: 0 8px 32px ${({ theme }) => 
     theme.colors.background === '#FFFFFF'
       ? 'rgba(0, 0, 0, 0.1)'
-      : 'rgba(255, 255, 255, 0.1)'};
-  border-radius: 12px;
+      : 'rgba(0, 0, 0, 0.3)'};
+  backdrop-filter: blur(20px);
+  border: 1px solid ${({ theme }) =>
+    theme.colors.background === '#FFFFFF'
+      ? 'rgba(0, 0, 0, 0.05)'
+      : 'rgba(255, 255, 255, 0.05)'};
+  border-radius: 24px;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const HeroImage = styled.img`
   width: 100%;
   height: 500px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-bottom: 2rem;
+  box-shadow: 0 4px 20px ${({ theme }) =>
+    theme.colors.background === '#FFFFFF'
+      ? 'rgba(0, 0, 0, 0.1)'
+      : 'rgba(0, 0, 0, 0.3)'};
+
+  @media (max-width: 768px) {
+    height: 300px;
+  }
 `;
 
 const RecipeHeader = styled.div`
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   max-width: 800px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 3rem;
 `;
 
 const Title = styled.h1`
   font-family: ${({ theme }) => theme.typography.accentFont};
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: ${({ theme }) => theme.colors.text};
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const MetaInfo = styled.div`
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
   color: ${({ theme }) => theme.colors.text};
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
-  opacity: 0.9;
+  font-size: 1.1rem;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    gap: 1.5rem;
+    font-size: 1rem;
+  }
 `;
 
 const ServingAdjuster = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 2rem;
   justify-content: center;
   color: ${({ theme }) => theme.colors.text};
+  font-size: 1.2rem;
 `;
 
 const AdjustButton = styled.button`
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.background};
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  border: none;
 
   &:hover {
-    opacity: 0.9;
-    transform: scale(1.05);
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 `;
 
 const TabsContainer = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   max-width: 1000px;
-  margin: 0 auto 2rem;
+  margin: 0 auto;
 `;
 
 const Tabs = styled.div`
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 2rem;
+  margin-bottom: 3rem;
   justify-content: center;
   flex-wrap: wrap;
+  border-bottom: 1px solid ${({ theme }) => 
+    theme.colors.background === '#FFFFFF'
+      ? 'rgba(0, 0, 0, 0.1)'
+      : 'rgba(255, 255, 255, 0.1)'};
+  padding-bottom: 0.5rem;
 `;
 
 const Tab = styled.button<{ active: boolean }>`
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 0;
   border-bottom: 2px solid
     ${({ theme, active }) =>
       active ? theme.colors.primary : 'transparent'};
   color: ${({ theme, active }) =>
     active ? theme.colors.primary : theme.colors.text};
   font-weight: ${({ active }) => (active ? '600' : '400')};
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  position: relative;
 
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: ${({ theme }) => theme.colors.primary};
+    transform: scaleX(${({ active }) => (active ? 1 : 0)});
+    transition: transform 0.3s ease;
+  }
+
+  &:hover:after {
+    transform: scaleX(1);
   }
 `;
 
 const ContentContainer = styled.div`
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 2rem;
   color: ${({ theme }) => theme.colors.text};
+  background: ${({ theme }) => 
+    theme.colors.background === '#FFFFFF'
+      ? 'rgba(255, 255, 255, 0.5)'
+      : 'rgba(0, 0, 0, 0.2)'};
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
 `;
 
 const IngredientsList = styled.ul`
   list-style: none;
   padding: 0;
+  margin: 0 0 2rem 0;
 `;
 
 const IngredientActions = styled.div`
@@ -209,25 +272,44 @@ const SuccessMessage = styled.div`
 const IngredientItem = styled.li`
   display: flex;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors.neutralLight};
   font-size: 1.1rem;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: ${({ theme }) => 
+      theme.colors.background === '#FFFFFF'
+        ? 'rgba(0, 0, 0, 0.02)'
+        : 'rgba(255, 255, 255, 0.02)'};
+  }
 
   > span:first-child {
     min-width: 120px;
+    font-weight: 500;
   }
 `;
 
 const InstructionsList = styled.ol`
   padding-left: 2rem;
-  color: ${({ theme }) => theme.colors.text};
+  margin: 0;
 `;
 
 const InstructionStep = styled.li`
   margin-bottom: 2rem;
-  line-height: 1.6;
+  line-height: 1.8;
   font-size: 1.1rem;
   color: ${({ theme }) => theme.colors.text};
+  padding: 1rem;
+  background: ${({ theme }) => 
+    theme.colors.background === '#FFFFFF'
+      ? 'rgba(255, 255, 255, 0.7)'
+      : 'rgba(0, 0, 0, 0.2)'};
+  border-radius: 12px;
+  border: 1px solid ${({ theme }) =>
+    theme.colors.background === '#FFFFFF'
+      ? 'rgba(0, 0, 0, 0.05)'
+      : 'rgba(255, 255, 255, 0.05)'};
 `;
 
 const CaloriesContainer = styled.div`
@@ -256,19 +338,21 @@ const CaloriesInfo = styled.p`
 const TimerButton = styled.button`
   background-color: ${({ theme }) => theme.colors.accent};
   color: ${({ theme }) => theme.colors.background};
-  padding: 0.5rem 0.75rem;
-  border-radius: 12px;
-  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  margin-left: 1rem;
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   border: none;
   display: inline-flex;
   align-items: center;
+  gap: 0.5rem;
 
   &:hover {
-    filter: brightness(1.1);
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -306,54 +390,80 @@ const BackButton = styled.button`
 const StartCookingButton = styled(motion.button)`
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.background};
-  padding: 1rem 2rem;
-  border-radius: 25px;
+  padding: 1.25rem 3rem;
+  border-radius: 30px;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   margin: 3rem auto 1rem;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
   border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 
   &:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
   }
 `;
 
 const NutrientChartContainer = styled.div`
-  height: 400px;
+  height: 450px;
   width: 100%;
   margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const ChartTitle = styled.h3`
   text-align: center;
   margin-bottom: 1rem;
   font-family: ${({ theme }) => theme.typography.accentFont};
-  color: ${({ theme }) => theme.colors.neutralDark};
+  color: ${({ theme }) => theme.colors.text};
+`;
+
+const ChartWrapper = styled.div`
+  height: 400px;
+  width: 100%;
+  position: relative;
+`;
+
+const TotalCaloriesInfo = styled(CaloriesInfo)`
+  margin-top: 1rem;
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid ${({ theme }) => 
+    theme.colors.background === '#FFFFFF'
+      ? 'rgba(0, 0, 0, 0.1)'
+      : 'rgba(255, 255, 255, 0.1)'};
 `;
 
 const BackToRecipesButton = styled.button`
-  margin-bottom: 0.8rem;
+  margin-bottom: 1.5rem;
   background: none;
   color: ${({ theme }) => theme.colors.text};
-  padding: 0.75rem 0;
+  padding: 0.75rem 1rem;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   border: none;
+  border-radius: 8px;
 
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
     transform: translateX(-4px);
+    background: ${({ theme }) => 
+      theme.colors.background === '#FFFFFF'
+        ? 'rgba(0, 0, 0, 0.05)'
+        : 'rgba(255, 255, 255, 0.05)'};
   }
 `;
 
@@ -598,36 +708,38 @@ const RecipeDetailPage: React.FC = () => {
                 <CaloriesTitle>Nutrition Information</CaloriesTitle>
                 
                 <CaloriesInfo style={{ fontSize: '1.5rem', textAlign: 'center', margin: '1rem 0' }}>
-                Per serving - {recipe.nutrition.calories} calories
+                  Per serving - {recipe.nutrition.calories} calories
                 </CaloriesInfo>
 
                 <NutrientChartContainer>
                   <ChartTitle>Nutrient Distribution (in grams)</ChartTitle>
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={getNutrientData(recipe.nutrition)}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={true}
-                        label={({ name, value }) => `${name}: ${value}g`}
-                        outerRadius={130}
-                        fill="#8884d8"
-                        dataKey="value"
-                      >
-                        {getNutrientData(recipe.nutrition).map((_, index) => (
-                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                      <Legend />
-                    </PieChart>
-                  </ResponsiveContainer>
+                  <ChartWrapper>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={getNutrientData(recipe.nutrition)}
+                          cx="50%"
+                          cy="45%"
+                          labelLine={true}
+                          label={({ name, value }) => `${name}: ${value}g`}
+                          outerRadius={120}
+                          fill="#8884d8"
+                          dataKey="value"
+                        >
+                          {getNutrientData(recipe.nutrition).map((_, index) => (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                          ))}
+                        </Pie>
+                        <Tooltip />
+                        <Legend verticalAlign="bottom" height={36} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </ChartWrapper>
                 </NutrientChartContainer>
 
-                <CaloriesInfo style={{ marginTop: '2rem', textAlign: 'center' }}>
+                <TotalCaloriesInfo>
                   Total calories for {servings} servings: {(recipe.nutrition.calories * servings).toFixed(0)}
-                </CaloriesInfo>
+                </TotalCaloriesInfo>
               </CaloriesContainer>
             )}
           </ContentContainer>

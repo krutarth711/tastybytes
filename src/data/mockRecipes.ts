@@ -143,7 +143,7 @@ export const mockRecipes: Recipe[] = [
   {
     id: 4,
     title: 'Beef Wellington',
-    description: 'A luxurious dish of beef tenderloin wrapped in mushroom duxelles, and prosciutto',
+    description: 'A luxurious dish of beef tenderloin wrapped in mushroom duxelles',
     image: beefWellingtonImg,
     prepTime: '2 hours',
     cookingTime: '45 mins',
